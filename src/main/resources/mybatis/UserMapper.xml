@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hello.mybatis.repository.mybatis.mapper.UserMapper">
+
+    <resultMap id="titleLogResultMap" type="com.hello.mybatis.repository.domain.User">
+        <id property="id" column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <result property="name" column="name"/>
+        <result property="gender" column="gender"/>
+        <result property="birthday" column="birthday"/>
+        <result property="email" column="email"/>
+        <result property="phone" column="phone"/>
+    </resultMap>
+
+    <insert id="createTitleLog" parameterType="com.hello.mybatis.repository.domain.User" useGeneratedKeys="true"
+            keyProperty="id">
+        INSERT INTO title_log (
+        user_id,
+        create_time,
+        past_host_title,
+        current_host_title,
+        past_looper_title,
+        current_looper_title,
+        note
+        )
+        VALUES
+        (
+        #{userId},
+        #{createTime},
+        #{pastHostTitle},
+        #{currentHostTitle},
+        #{pastLooperTitle},
+        #{currentLooperTitle},
+        #{note}
+        );
+    </insert>
+
+    <delete id="deleteLogsOlderThanOneMonth" parameterType="map">
+        <if test="lastMonth != null">
+            DELETE FROM title_log WHERE create_time &lt;= #{lastMonth}
+        </if>
+    </delete>
+
+    <select id="listTitlesByUserId" parameterType="int" resultMap="titleLogResultMap">
+        SELECT * FROM title_log WHERE user_id = #{id}
+    </select>
+
+</mapper>
