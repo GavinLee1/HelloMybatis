@@ -12,7 +12,7 @@ public interface UserMapper {
 
     int createUser(final User user);
 
-    User getUserById(final int id);
+    User selectUserById(final int id);
 
     List<User> listUserByIdList(final Collection<Integer> idList);
 }
