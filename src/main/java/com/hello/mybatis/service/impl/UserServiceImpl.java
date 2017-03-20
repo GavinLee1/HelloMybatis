@@ -4,12 +4,11 @@ import com.hello.mybatis.exception.DatabaseException;
 import com.hello.mybatis.repository.mybatis.interf.UserMabatisRepository;
 import com.hello.mybatis.repository.pojo.User;
 import com.hello.mybatis.service.interf.UserService;
-import com.hello.mybatis.service.message.BaseResp;
-import com.hello.mybatis.service.message.CreateUserReq;
-import com.hello.mybatis.service.message.GetUserResp;
+import com.hello.mybatis.service.message.*;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.util.List;
 
 /**
  * Created by ligaozhao on 19/03/17.
@@ -53,4 +52,30 @@ public class UserServiceImpl implements UserService {
 
         return new BaseResp(true, "OK");
     }
+
+    @Override
+    public ListUserResp listUserByIdList(ListUserReq req) {
+        if (req == null) {
+            return new ListUserResp(false, "Null Request!");
+        }
+
+        if (req.getIdList() == null || req.getIdList().isEmpty()) {
+            return new ListUserResp(false, "Id list is empty!");
+        }
+
+        List<User> userList = null;
+        try {
+            userList = userMabatisRepository.listUserByIdList(req.getIdList());
+        } catch (DatabaseException e) {
+            return new ListUserResp(false, e.toString());
+        }
+
+        if (userList == null || userList.isEmpty()) {
+            return new ListUserResp(true, "No User Found in this id list!");
+        }
+
+        return new ListUserResp(userList);
+    }
+
+
 }

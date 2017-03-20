@@ -1,9 +1,7 @@
 package com.hello.mybatis.controller;
 
 import com.hello.mybatis.service.interf.UserService;
-import com.hello.mybatis.service.message.BaseResp;
-import com.hello.mybatis.service.message.CreateUserReq;
-import com.hello.mybatis.service.message.GetUserResp;
+import com.hello.mybatis.service.message.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,5 +27,11 @@ public class UserController {
     @RequestMapping(value = "/create-user", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public BaseResp createUser(@RequestBody CreateUserReq req) {
         return userService.createUser(req);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/list-user-by-id-list", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public ListUserResp createUser(@RequestBody ListUserReq req) {
+        return userService.listUserByIdList(req);
     }
 }

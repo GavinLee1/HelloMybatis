@@ -59,6 +59,15 @@ public class UserMybatisRepositoryImpl implements UserMabatisRepository {
 
     @Override
     public List<User> listUserByIdList(Collection<Integer> idList) throws DatabaseException {
-        return null;
+        List<User> userList = null;
+
+        try {
+            userList = getMapper().listUserByIdList(idList);
+        } catch (DataAccessException e) {
+            log.error("[listUserByIdList] - Fail to access DB with list[{}]", idList.toString(), e);
+            throw new DatabaseException("[listUserByIdList] - Fail to access DB", e);
+        }
+
+        return userList;
     }
 }
