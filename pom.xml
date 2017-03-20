@@ -24,6 +24,8 @@
         <HikariCP.version>2.5.1</HikariCP.version>
 
         <javax.inject.version>1</javax.inject.version>
+
+        <swagger.version>2.4.0</swagger.version>
     </properties>
 
     <dependencies>
@@ -85,6 +87,21 @@
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
             <version>${javax.inject.version}</version>
+        </dependency>
+
+        <!--            Below two dependencies are for Swagger API          -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
