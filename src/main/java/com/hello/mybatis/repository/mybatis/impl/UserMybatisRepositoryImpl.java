@@ -24,12 +24,21 @@ public class UserMybatisRepositoryImpl implements UserMabatisRepository {
     private SqlSession sqlSession;
 
     private final static Logger log = LoggerFactory.getLogger(UserMybatisRepositoryImpl.class);
+
     private UserMapper getMapper() {
         return this.sqlSession.getMapper(UserMapper.class);
     }
 
     @Override
-    public int createUser(User user) {
+    public int createUser(User user) throws DatabaseException {
+
+        int result = getMapper().createUser(user);
+
+        if (result <= 0) {
+            log.error("[createUser] - Fail to create user[{}]", user.toString());
+            throw new DatabaseException("[createUser] - Fail to create user: " + user.toString());
+        }
+
         return 0;
     }
 
@@ -49,7 +58,7 @@ public class UserMybatisRepositoryImpl implements UserMabatisRepository {
     }
 
     @Override
-    public List<User> listUserByIdList(Collection<Integer> idList) {
+    public List<User> listUserByIdList(Collection<Integer> idList) throws DatabaseException {
         return null;
     }
 }

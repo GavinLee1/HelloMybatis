@@ -1,6 +1,7 @@
 package com.hello.mybatis.service.interf;
 
-import com.hello.mybatis.repository.pojo.User;
+import com.hello.mybatis.service.message.BaseResp;
+import com.hello.mybatis.service.message.CreateUserReq;
 import com.hello.mybatis.service.message.GetUserResp;
 
 /**
@@ -9,4 +10,6 @@ import com.hello.mybatis.service.message.GetUserResp;
 public interface UserService {
 
     GetUserResp getUserById(int id);
+
+    BaseResp createUser(CreateUserReq req);
 }

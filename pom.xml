@@ -26,6 +26,8 @@
         <javax.inject.version>1</javax.inject.version>
 
         <swagger.version>2.4.0</swagger.version>
+
+        <apache.lang.version>3.4</apache.lang.version>
     </properties>
 
     <dependencies>
@@ -102,6 +104,12 @@
             <artifactId>springfox-swagger2</artifactId>
             <version>${swagger.version}</version>
             <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${apache.lang.version}</version>
         </dependency>
     </dependencies>
 

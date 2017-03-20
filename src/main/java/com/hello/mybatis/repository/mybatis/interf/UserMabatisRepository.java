@@ -11,9 +11,9 @@ import java.util.List;
  */
 public interface UserMabatisRepository {
 
-    int createUser(final User user);
+    int createUser(final User user) throws DatabaseException;
 
     User getUserById(final int id) throws DatabaseException;
 
-    List<User> listUserByIdList(final Collection<Integer> idList);
+    List<User> listUserByIdList(final Collection<Integer> idList) throws DatabaseException;
 }

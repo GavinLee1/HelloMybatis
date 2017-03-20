@@ -1,16 +1,15 @@
-package com.hello.mybatis.repository.pojo;
+package com.hello.mybatis.service.message;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
- * Created by ligaozhao on 19/03/17.
+ * Created by ligaozhao on 20/03/17.
  */
-public class User {
 
-    private Integer id;
+public class CreateUserReq implements Serializable {
+
+    private static final long serialVersionUID = 8891232214844141676L;
 
     private String name;
 
@@ -22,19 +21,7 @@ public class User {
 
     private String phone;
 
-    public User() {
-    }
-
-    public User(String name, int gender, Timestamp birthday, String email, String phone) {
-        this.name = name;
-        this.gender = gender;
-        this.birthday = birthday;
-        this.email = email;
-        this.phone = phone;
-    }
-
-    public Integer getId() {
-        return id;
+    public CreateUserReq() {
     }
 
     public String getName() {
@@ -75,10 +62,5 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    @Override
-    public String toString() {
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }

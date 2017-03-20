@@ -4,6 +4,8 @@ import com.hello.mybatis.exception.DatabaseException;
 import com.hello.mybatis.repository.mybatis.interf.UserMabatisRepository;
 import com.hello.mybatis.repository.pojo.User;
 import com.hello.mybatis.service.interf.UserService;
+import com.hello.mybatis.service.message.BaseResp;
+import com.hello.mybatis.service.message.CreateUserReq;
 import com.hello.mybatis.service.message.GetUserResp;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +35,22 @@ public class UserServiceImpl implements UserService {
         }
 
         return new GetUserResp(user);
+    }
+
+    @Override
+    public BaseResp createUser(CreateUserReq req) {
+        if (req == null) {
+            return new BaseResp(false, "Null Request!");
+        }
+        User user = new User(req.getName(), req.getGender(), req.getBirthday(), req.getEmail(), req.getPhone());
+
+        try {
+            userMabatisRepository.createUser(user);
+        } catch (DatabaseException e) {
+            return new BaseResp(false, e.toString());
+        }
+
+
+        return new BaseResp(true, "OK");
     }
 }
