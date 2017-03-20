@@ -3,7 +3,7 @@
 
 <mapper namespace="com.hello.mybatis.repository.mybatis.mapper.UserMapper">
 
-    <resultMap id="titleLogResultMap" type="com.hello.mybatis.repository.domain.User">
+    <resultMap id="userResultMap" type="com.hello.mybatis.repository.pojo.User">
         <id property="id" column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
         <result property="name" column="name"/>
         <result property="gender" column="gender"/>
@@ -12,37 +12,35 @@
         <result property="phone" column="phone"/>
     </resultMap>
 
-    <insert id="createTitleLog" parameterType="com.hello.mybatis.repository.domain.User" useGeneratedKeys="true"
+    <insert id="createUser" parameterType="com.hello.mybatis.repository.pojo.User" useGeneratedKeys="true"
             keyProperty="id">
-        INSERT INTO title_log (
-        user_id,
-        create_time,
-        past_host_title,
-        current_host_title,
-        past_looper_title,
-        current_looper_title,
-        note
+        INSERT INTO user (
+        name,
+        gender,
+        birthday,
+        email,
+        phone
         )
         VALUES
         (
-        #{userId},
-        #{createTime},
-        #{pastHostTitle},
-        #{currentHostTitle},
-        #{pastLooperTitle},
-        #{currentLooperTitle},
-        #{note}
+        #{name},
+        #{gender},
+        #{birthday},
+        #{email},
+        #{phone}
         );
     </insert>
 
-    <delete id="deleteLogsOlderThanOneMonth" parameterType="map">
-        <if test="lastMonth != null">
-            DELETE FROM title_log WHERE create_time &lt;= #{lastMonth}
-        </if>
-    </delete>
+    <select id="selectUserById" parameterType="int" resultMap="userResultMap">
+        SELECT * FROM user WHERE id=#{id}
+    </select>
 
-    <select id="listTitlesByUserId" parameterType="int" resultMap="titleLogResultMap">
-        SELECT * FROM title_log WHERE user_id = #{id}
+    <select id="listUserByIdList" resultMap="userResultMap">
+        SELECT * FROM user WHERE id IN
+        <foreach item="item" index="index" collection="list"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
     </select>
 
 </mapper>

@@ -53,7 +53,7 @@ public class MybatisConf {
 
         sqlSessionFactoryBean.setDataSource(userDataSource());
 
-        sqlSessionFactoryBean.setTypeAliasesPackage("com.hello.mybatis.repository.domain");
+        sqlSessionFactoryBean.setTypeAliasesPackage("com.hello.mybatis.repository.pojo");
 
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
